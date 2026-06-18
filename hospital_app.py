@@ -82,3 +82,42 @@ def show_header():
         <h1 style="color: white;">
           Smart Hospital Patient Navigator
         </h1>
+        <p style=color: white; font-size: 18px;>
+            Find the right department for your symptoms
+        </p>
+    </div>
+  """, unsafe_allow_html=True)
+
+def show_symptom_section():
+    """Returns a dict of symptom checkboxes {symptom_name: True/False}"""
+    st.subheader("1. What are your main symptoms?")
+
+    col1, col2, col3, col4 = st.columns(4)
+    symptoms = {}
+
+    with col1:
+        symptoms['fever'] = st.checkbox("🌡️ Fever")
+        symptoms['cough'] = st.checkbox("🤧 Cough")
+    with col2:
+        symptoms['headache']   = st.checkbox("🤕 Headache")
+        symptoms['chest_pain'] = st.checkbox("💔 Chest Pain")
+    with col3:
+        symptoms['stomach_pain']     = st.checkbox("🤢 Stomach Pain")
+        symptoms['shortness_breath'] = st.checkbox("😮‍💨 Shortness of Breath")
+    with col4:
+        symptoms['nausea_vomiting'] = st.checkbox("🤮 Nausea / Vomiting")
+        symptoms['dizziness']       = st.checkbox("😵 Dizziness")
+
+    col5, _, _, _ = st.columns(4)
+    with col5:
+        symptoms['skin_rash'] = st.checkbox("🔴 Skin Rash")
+
+    return symptoms
+
+def main():
+  st.set_page_config(page_title="ChatGPT Hospital Patient Navigator", page_icon="🏥", layout="wide")
+
+  show_header()
+
+if __name__ == "__main__":
+  main()
