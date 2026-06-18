@@ -257,7 +257,7 @@ def show_result(dept_name: str, confidence: float, all_proba):
 # ─────────────────────────────────────────────
 
 def main():
-    st.set_page_config(page_title="Smart Hospital Patient Navigator", page_icon="🏥", layout="wide")
+    st.set_page_config(page_title="ChatGPT Hospital Patient Navigator", page_icon="🏥", layout="wide")
 
     show_header()
 
