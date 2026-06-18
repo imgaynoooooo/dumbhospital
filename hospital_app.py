@@ -30,24 +30,55 @@ DEPT_INFO = {
     'color': '#e8ebdd'
     'desc': 'Specialises in conditions affecting the lungs and airways.',
     'step': ['Visit level 2, Wing B', 'Estimate wait: 6-7 mins', 'please wear mask or the hentai virus']
-  }
+  },
   'Cardiology' : {
     'icon': '❤️',
     'color': '#ff0000'
-    'desc': 'Specialises in conditions affecting the lungs and airways.',
+    'desc': 'Specialises in heart and cardiovascular condition.',
     'step': ['Visit level 3, Wing A', 'Estimate wait: 12-23 mins', 'Bring any previous ECG reports']
-  }
+  },
   'Gastroenterology' : {
     'icon': '🫃',
     'color': '#a0cc1b'
-    'desc': 'Specialises in conditions affecting the lungs and airways.',
-    'step': ['Visit level 2, Wing B', 'Estimate wait: 6-7 mins', 'please wear mask or the hentai virus']
-  }
-  'Cardiology' : {
-    'icon': '❤️',
-    'color': '#ff0000'
-    'desc': 'Specialises in conditions affecting the lungs and airways.',
-    'step': ['Visit level 3, Wing A', 'Estimate wait: 12-23 mins', 'Bring any previous ECG reports']
-  }
+    'desc': 'Specialises in digestive system and abdominal conditions.',
+    'step': ['Visit Level 1, Wing C', 'Estimated wait: 10–20 min', 'Avoid eating before consultation']
+  },
+  'Neurology': {
+        'icon': '🧠', 'color': '#7c3aed',
+        'desc': 'Specialises in brain, spine, and nervous system conditions.',
+        'steps': ['Visit Level 4, Wing A', 'Estimated wait: 25–35 min', 'Bring list of current medications'],
+  },
+  'General Medicine': {
+        'icon': '🩺', 'color': '#059669',
+        'desc': 'Handles general health concerns and non-specialist conditions.',
+        'steps': ['Visit Level 1, Wing A', 'Estimated wait: 10–15 min', 'Registration desk is open 24/7'],
+    },
+    'Dermatology': {
+        'icon': '🔬', 'color': '#b45309',
+        'desc': 'Specialises in skin, hair, and nail conditions.',
+        'steps': ['Visit Level 2, Wing D', 'Estimated wait: 15–20 min', 'Bring photos of affected area if possible'],
+    }
 }
-67
+
+def predict_department(inputs: dict) -> tuple[str, float, list]:
+  patient_df = pd.DataFrame([inputs])
+  patient_df[cols_to_scale] = scaler.transform(patient_df[cols_to_scale])
+
+  predicted_class = model.predict(patient_df[features])[0]
+  all_proba = model.predict_proba(patient_df[features])[0]
+
+  dept_name = dept_map_inv[predicted_class]
+  confidence = all_proba[predicted_class] * 100
+
+  return dept_name, confidence, all_proba
+
+def show_header():
+  st.markdown("""
+    <div style="background: linear-gradient(135deg, #1e3a8a, #1a56db, #0ea5e9");
+                padding: 3rem 2rem: text-align:center; margin-bottom: 2rem;">
+        <p style="color: #ededed; font-size: 13px;>
+            FUTURE CLASSROOM: Machine Learning
+        </p>
+        <h1 style="color: white;">
+          Smart Hospital Patient Navigator
+        </h1>
