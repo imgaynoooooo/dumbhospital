@@ -224,7 +224,7 @@ def show_result(dept_name: str, confidence: float, all_proba):
 # ─────────────────────────────────────────────
 
 def main():
-    st.set_page_config(page_title="ChatGPT Hospital Patient Navigator", page_icon="🏥", layout="wide")
+    st.set_page_config(page_title="Smart Hospital Patient Navigator", page_icon="🏥", layout="wide")
 
     show_header()
 
@@ -254,6 +254,9 @@ def main():
         dept_name, confidence, all_proba = predict_department(inputs)
         show_result(dept_name, confidence, all_proba)
 
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
