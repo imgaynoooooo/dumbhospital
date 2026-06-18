@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 @st.cache_resource
-def load_mode():
+def load_model():
   with open('hospital_model.pki', 'rb') as f:
     return pickle.load(f)
 
